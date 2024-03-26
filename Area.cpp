@@ -8,7 +8,6 @@ void Area::AddRoom(const std::string &name, Room *room) {
 
 void Area::ConnectRooms(const std::string &room1Name, const std::string &room2Name, const std::string &direction) {
     // connects two rooms using a specified direction (north, south, east, west)
-    // DIRECTION SYSTEM, 1 = north, 2 = east, 3 = south, 4 = west
     Room* room1 = rooms[room1Name];
     Room* room2 = rooms[room2Name];
 
@@ -37,6 +36,6 @@ void Area::LoadMapFromFile(const std::string &filename) {
 }
 
 Room *Area::GetRoom(const std::string &name) {
-    return nullptr;
+    return rooms[name];
 }
 

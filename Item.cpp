@@ -7,7 +7,7 @@ Item::Item(const std::string &name, const std::string &desc) {
 }
 
 void Item::Interact() {
-    std::cout << "You interacted with " << name << std::endl;
+    std::cout << "You picked up " << name << std::endl;
 }
 
 std::string Item::GetName() const { return name; }

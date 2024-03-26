@@ -15,6 +15,9 @@ private:
 public:
     Character(const std::string& name, int health);
     void TakeDamage(int damage);
+    void AddItem(const Item& item);
+    std::vector<Item> GetInventory();
+    std::string GetName();
 };
 class Player : public Character {
 private:
@@ -23,6 +26,7 @@ public:
     Player(const std::string& name, int health);
     void SetLocation(Room* room);
     Room* GetLocation();
+    void move(Room *nextRoom);
 };
 
 #endif
