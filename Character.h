@@ -15,6 +15,8 @@ private:
 public:
     Character(const std::string& name, int health);
     void TakeDamage(int damage);
+    void AddItem(const Item& item);
+    std::vector<Item> GetInventory();
 };
 class Player : public Character {
 private:
