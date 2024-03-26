@@ -6,24 +6,13 @@
 #include "Area.h"
 
 
-int main() {
-    Room *room1 = new Room("North room");
-    Room *room2 = new Room("South room");
-
-    Item *item1 = new Item("sword", "A sharp sword");
-    Item *item2 = new Item("shield", "A sturdy shield");
-
-    room1->AddItem(*item1);
-    room2->AddItem(*item2);
-
+int main() {;
     Area *area = new Area();
-    area->AddRoom("room1", room1);
-    area->AddRoom("room2", room2);
-
-    area->ConnectRooms("room1", "room2", "north");
-
+    area->LoadMapFromFile("/Users/thomasmok/CLionProjects/AnotherCoursework/game_map.txt");
     Player player("Alice", 100);
-    player.SetLocation(room1);
+    player.SetLocation(area->GetRoom("startroom"));
+
+    std::cout << "Welcome to the game!" << std::endl;
 
     while (true) {
         std::cout << "Current Location: " << player.GetLocation()->GetDescription() << std::endl;
