@@ -17,7 +17,6 @@ void Area::ConnectRooms(const std::string &room1Name, const std::string &room2Na
     room2->AddExit(direction, room1);
 }
 
-
 std::string Area::GetOppositeDirection(const std::string &direction) {
     // returns the opposite direction based on the input direction
     if (direction == "north") {
