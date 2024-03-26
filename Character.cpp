@@ -14,9 +14,7 @@ void Character::AddItem(const Item &item) {
     this->inventory.push_back(item);
 }
 
-Player::Player(const std::string &name, int health) : Character(name, health) {
-
-}
+Player::Player(const std::string &name, int health) : Character(name, health) {}
 
 void Player::SetLocation(Room *room) {
     this->location = room;
