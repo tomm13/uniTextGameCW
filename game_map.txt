@@ -1,4 +1,6 @@
 startroom,hallway,north
 startroom,southmostroom,south
 hallway,northmostroom,north
-startroom,eastmostroom,east
+startroom,eastroom,east
+eastroom,eastmostroom,east
+eastmostroom,exit,south

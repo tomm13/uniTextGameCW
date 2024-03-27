@@ -15,6 +15,7 @@ int main() {;
     std::cout << "Welcome to the game!" << std::endl;
 
     while (true) {
+        area->VisualizeMap("/Users/thomasmok/CLionProjects/AnotherCoursework/game_map.txt");
         std::cout << "Current Location: " << player.GetLocation()->GetDescription() << std::endl;
         std::cout << "Items in your inventory:" << std::endl;
         for (const Item& item : player.GetInventory()) {

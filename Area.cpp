@@ -74,3 +74,86 @@ Room *Area::GetRoom(const std::string &name) {
     return rooms[name];
 }
 
+void Area::VisualizeMap(const std::string &filename){
+    // first we read through the rooms and their exits and count how many rooms there are in each direction
+    // of the starting room
+    // for example, if the starting room has exits to the north, south, east, and west, we will have 1 room in each direction
+    // using this, we can determine the size of the visualized map, which will be a 2D array
+    // this will be heavily aided by the GetExit function in Room.cpp
+    // we will then print out the map with the starting room in the center
+    // a room will be represented by [] and the player will be represented by X
+    // the player will be placed in the center of the map
+    // the map will be printed out in the console
+    // connections to other rooms will either be represented by a line or a dash (| or -)
+    // fixed map size of 5x5
+    // fillsize means the size of the map including the connections
+    int size = 5;
+    int fullSize = 2 * size - 1;
+    // create a map of size 9x9 (to allow space for connections)
+    std::string map[fullSize][fullSize];
+
+
+    // fill the map with nullptrs
+    for (int i=0; i<fullSize; i++) {
+        for (int j=0; j<fullSize; j++) {
+            map[i][j] = "  ";
+        }
+    }
+
+    map[size - 1][size - 1] = "[X]";
+
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cerr << "Error opening the file!" << std::endl;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::vector<std::string> components;
+        std::string component;
+        while (std::getline(iss, component, ',')) {
+            components.push_back(component);
+        }
+        int offsetx = 0;
+        int offsety = 0;
+        if (components[0] == "startroom") {
+            if (components[2] == "east") {
+                map[offsety + size - 1][offsetx + size + 1] = "[ ]";
+                std::cout << "east" << std::endl;
+            } else if (components[2] == "west") {
+                map[offsety + size - 1][offsetx + size - 3] = "[ ]";
+                std::cout << "west" << std::endl;
+            } else if (components[2] == "north") {
+                map[offsety + size + 1][offsetx + size - 1] = "[ ]";
+                std::cout << "north" << std::endl;
+            } else if (components[2] == "south") {
+                map[offsety + size - 3][offsetx + size - 1] = "[ ]";
+                std::cout << "south" << std::endl;
+            }
+        }
+    }
+
+    // key algorithm for mapping the rooms
+    // if a room exists, and the room east of it exists, then there is a horizontal connection
+    // if a room exists, and the room south of it exists, then there is a vertical connection
+    for (int i=0; i<fullSize-2; i=i+2) {
+        for (int j=0; j<fullSize-2; j=j+2) {
+            if (map[i][j] != "  " and map[i][j+2] != "  ") {
+                map[i][j+1] = "--";
+            }
+            if (map[i][j] != "  " and map[i+2][j] != "  ") {
+                map[i+1][j] = " |";
+            }
+        }
+    }
+
+    // print out the map
+    for (int i=0; i<fullSize; i++) {
+        for (int j=0; j<fullSize; j++) {
+            std::cout << map[i][j];
+        }
+        std::cout << std::endl;
+    }
+}
