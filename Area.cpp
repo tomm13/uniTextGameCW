@@ -126,10 +126,10 @@ void Area::VisualizeMap(const std::string &filename){
                 map[offsety + size - 1][offsetx + size - 3] = "[ ]";
                 std::cout << "west" << std::endl;
             } else if (components[2] == "north") {
-                map[offsety + size + 1][offsetx + size - 1] = "[ ]";
+                map[offsety + size - 3][offsetx + size - 1] = "[ ]";
                 std::cout << "north" << std::endl;
             } else if (components[2] == "south") {
-                map[offsety + size - 3][offsetx + size - 1] = "[ ]";
+                map[offsety + size + 1][offsetx + size - 1] = "[ ]";
                 std::cout << "south" << std::endl;
             }
         }
